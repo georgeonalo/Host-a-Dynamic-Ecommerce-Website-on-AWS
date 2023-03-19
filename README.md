@@ -324,7 +324,7 @@ The next step is to setup a server(instance) that we will use to deploy the ecom
 ![image](https://user-images.githubusercontent.com/115881685/225553562-700ea842-c89b-4c18-9629-ca9db31931c7.png)
 ![image](https://user-images.githubusercontent.com/115881685/225553694-d049cc90-d92f-425f-8d5d-318b0edf6aca.png)
 ![image](https://user-images.githubusercontent.com/115881685/225554107-4c97de97-c32c-44b3-9787-fa3436524ec8.png)
-![image](https://user-images.githubusercontent.com/115881685/225554370-64159941-7d7b-43f2-93d7-a21a17e8320d.png)
+
 ![image](https://user-images.githubusercontent.com/115881685/226168078-f7f9320b-fc80-473e-adc3-f67c1c1b0c67.png)
 ![image](https://user-images.githubusercontent.com/115881685/226168108-9ea087ab-3eda-4c85-b356-05b976da3a42.png)
 
