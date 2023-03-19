@@ -761,11 +761,176 @@ Now the record set has been created, to access our website, copy the record name
 
 
 
+![image](https://user-images.githubusercontent.com/115881685/226195956-e713e0f7-770b-42ee-9f0d-978258bf3c4c.png)
+
+
 ![image](https://user-images.githubusercontent.com/115881685/226195664-560c5818-6d81-4c52-b2f8-4679c0895f5e.png)
 
 
 
-We can now access the website with our domain name.
+We can now access the website with our domain name. If you notice the website not loading properly, its because our domain has changed, we need to go into the website configuration files and update it, which we will do later.
+
+
+
+
+
+## Register for an SSL Certificate in AWS Certificate Manager
+The certificate manager encrypts all communication between the web browser and our web servers.
+
+To create a free certificate, go to the certificate manager dashboard in the console, and follow the steps in the screenshots below.
+
+
+
+![image](https://user-images.githubusercontent.com/115881685/225624926-a8d7dcc0-ddc3-46f1-ad79-bf67022a1160.png)
+![image](https://user-images.githubusercontent.com/115881685/225625050-ec772b81-046b-4dc6-b128-305b4ed946c3.png)
+![image](https://user-images.githubusercontent.com/115881685/225625247-4664ac7f-8eef-4b08-8179-8fc02062fb62.png)
+![image](https://user-images.githubusercontent.com/115881685/225625381-6ed19d1a-97bd-4cc7-a81c-02f43fd2431c.png)
+
+
+![image](https://user-images.githubusercontent.com/115881685/225627483-e9ea68cd-2229-4683-a73b-7006608cc87d.png)
+
+
+
+We have successfully requested for a certificate, the status is pending because it needs to be validated in route 53. To do that click "create a record" in the page and follow the instructions in the screenshots.
+
+
+
+
+![image](https://user-images.githubusercontent.com/115881685/225627634-44d5198c-13d5-4b20-9014-961d668ee4af.png)
+![image](https://user-images.githubusercontent.com/115881685/225627831-5bce3113-e095-4ef6-bfb2-270ff830e4ad.png)
+![image](https://user-images.githubusercontent.com/115881685/225630927-a8737485-0f82-4c1d-8cc7-283215b394f2.png)
+
+
+
+If you now check the status, it has been "issued", and the status of our two name name is now "success"
+
+
+
+## Create a HTTPS Listener
+Next we will use the ssl certificate to secure all communication with our website by creating https listener in loadbalancer dashboard.
+
+Follow the instructions in the screenshots.
+
+
+
+![image](https://user-images.githubusercontent.com/115881685/226197176-b284a3c0-ae59-4406-9c0e-09a49e07dccc.png)
+
+![image](https://user-images.githubusercontent.com/115881685/226197301-315f31f3-e5dc-457d-a34c-50fb9ccfc560.png)
+
+![image](https://user-images.githubusercontent.com/115881685/226197376-bdf4ee55-3030-4105-abdc-7e5261732dfa.png)
+
+![image](https://user-images.githubusercontent.com/115881685/226197705-0b2fb689-0f90-46f7-bf0f-ab94da3a732d.png)
+
+
+
+The HTTPS listener has been created, next thing is to modify our HTTP Listener to redirect traffic to HTTPS. See screenshots below for instruction.
+
+
+![image](https://user-images.githubusercontent.com/115881685/226197947-5794ff97-7bbc-485b-adca-3103ac22165f.png)
+
+![image](https://user-images.githubusercontent.com/115881685/226198051-62a8e5b9-7b15-42b4-b37e-2d323e998574.png)
+
+![image](https://user-images.githubusercontent.com/115881685/226198081-d6da80d9-1b16-4e28-8672-1dd605a16c3b.png)
+
+
+
+
+
+Now you can check to see if you can access the website. Go to your browser and type in your domain name starting with "https//www.domain name".
+
+
+
+![image](https://user-images.githubusercontent.com/115881685/226198255-1ed7ca7d-4864-43c9-bfe8-03dd3fefbb0f.png)
+
+
+
+
+Yes, not only can we access the website, it now has the lock symbol which means all communication between our website and web browser is now secured. What we just did is also called "security in transit".
+
+
+
+
+## SSH into an EC2 Instance in the Private Subnet
+
+Next step is to ssh into the the instance in the private subnet, but to that we first need to launch an instance in the public subnet, this instance is called bastion host, we will ssh into it, and from there we can now ssh into the instance in the private subnet.
+
+Follow the exact same step as before in launching instance in the public subnet.
+
+
+
+![image](https://user-images.githubusercontent.com/115881685/226199010-6ce9e24b-9061-444c-b56e-1977dfb379fc.png)
+
+
+
+
+Now copy the public ipv4 of the server and ssh into it.
+
+
+![image](https://user-images.githubusercontent.com/115881685/226199147-de7fce88-2fb2-407e-81a6-00cf545d6d27.png)
+
+
+Once you have ssh into the bastion host which is in the public subnet, from here we easily ssh into any instance in the private subnet.
+
+To do this, simply type, "ssh ec2-user@private ipv4 address" of any of webserver in the private subnet.
+
+
+
+
+![image](https://user-images.githubusercontent.com/115881685/226199475-206ce0ce-41c4-4e14-a61b-df2ba4c5bd5d.png)
+
+
+
+
+![image](https://user-images.githubusercontent.com/115881685/226199551-c8b8d3bd-04a5-4e22-9c69-2fe904de9339.png)
+
+
+
+
+
+We have successfully ssh into the instance in the private subnet, we can tell we are in the ec2 instance in the private subnet, because the ip address here, is the same as the webserver az1 in the ec2 dashboard
+
+
+
+
+
+## Update the ENV File
+
+IF you observer our website is not loading properly, this is because we need to update the domain name setting of our website.
+
+To this, first terminate the Webserver AZ2 in the EC2 dashboard. Then SSH into Webserver AZ1 in the private subnet. Once you are in the type "sudo su" to be logged in as the root user.
+
+
+
+
+![image](https://user-images.githubusercontent.com/115881685/226200701-8b4df8c6-f762-4e0e-93eb-15ddebc56687.png)
+
+
+
+
+Then change our directory to the HTML directory by typing "cd /var/www/html" and press enter, next type in "nano .env" and enter. Env is the file we want to edit.
+
+
+
+
+![image](https://user-images.githubusercontent.com/115881685/226201120-726d1890-b2ed-4a3f-814b-05ace4fb18f5.png)
+
+
+
+![image](https://user-images.githubusercontent.com/115881685/226201648-2f93bbf6-78d2-4ad8-9a78-9b3fb60cdeea.png)
+
+
+
+Once in edit the App URL by deleting the you see there and replacing it with the domain name of your website. When done save it and exit.
+
+
+
+
+
+![image](https://user-images.githubusercontent.com/115881685/226203192-115ead02-1371-4e76-a2d0-897ed9b3e81c.png)
+
+
+
+
 
 
 
