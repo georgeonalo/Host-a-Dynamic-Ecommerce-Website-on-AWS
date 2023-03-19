@@ -587,7 +587,50 @@ Hurray !!!!!!!!!!!!!!!!!!!!!!! the importation is complete. All our data has now
 
 
 
-Next step is to delete all the resourses we created for the importation, things like, dummy key, dummy server, dummy security group. so go aheard and delete them.
+Next step is to delete all the resourses we created for the importation, things like, dummy key, dummy server, dummy security group. so go aheard and delete them. Also delete the dummy security group associated with the RDS database.
+
+
+
+
+### Next step SSH into the setup server.
+
+Copy the the public ipv4 address of the setup server and ssh into it, then run the command below that will enable us to add the dummy data into our website.
+
+
+```
+sudo su
+sudo aws s3 sync s3://georgenal86-fleetcart-dummy-data /home/ec2-user
+sudo unzip dummy.zip
+sudo mv dummy/* /var/www/html/public
+sudo mv -f dummy/.DS_Store /var/www/html/public
+sudo rm -rf /var/www/html/storage/framework/cache/data/cache
+sudo rm -rf dummy dummy.zip
+chown apache:apache -R /var/www/html 
+sudo service httpd restart
+```
+
+
+
+
+Once done with running the command, still copy the public ipv4 address of your setup server and paste in a new tab in your browser, press enter.
+
+
+
+
+![image](https://user-images.githubusercontent.com/115881685/226182412-f8cbe70a-69c2-4172-b92b-69b95ced1ea4.png)
+
+![image](https://user-images.githubusercontent.com/115881685/226182532-dab729f1-9651-4369-90ac-e50e4cfb09d0.png)
+
+![image](https://user-images.githubusercontent.com/115881685/226182572-a857c58c-3b8f-4db8-be77-f8cb09532516.png)
+
+
+
+
+
+
+Yes all our dummy data have been successfully added to our website and its no longer empty.
+
+
 
 
 
