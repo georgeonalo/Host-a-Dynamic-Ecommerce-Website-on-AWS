@@ -632,6 +632,104 @@ Yes all our dummy data have been successfully added to our website and its no lo
 
 
 
+Now that we have installed and configured our website, we will use the setup server(ec2 instance) we installed our website on to create an AMI. Then we can use the AMI to launch new EC2 instances with our website already configured on them.
+
+
+
+## Create an Amazon Machine Image (AMI)
+
+![image](https://user-images.githubusercontent.com/115881685/226191655-83c80af4-fe9b-4432-84b2-3009b03597e1.png)
+
+![image](https://user-images.githubusercontent.com/115881685/226191690-c756189d-25c6-4c13-a424-080b52e40113.png)
+
+![image](https://user-images.githubusercontent.com/115881685/226191725-cd36939e-9beb-47c5-bccb-d70b07490ecf.png)
+
+![image](https://user-images.githubusercontent.com/115881685/226191774-9cf17881-c4f8-4b39-8ff8-633d4afa6c19.png)
+
+
+
+
+When create an AMI a snapshot is als created, click on the snapshot tab to see it.
+
+Now we can use the AMI to launch new instances with our website already installed on them.
+
+
+
+## Create an Application Load Balancer(ALB)
+
+Next step is to create application loadbalancer, which helps to route traffic to instances in the private app subnets.
+
+Before creating the alb, first we will launch EC2 instances in each of the private app subnet with the help of the AMI we just created. Click on Launch instance in the EC2 dashboard and follow the steps below.
+
+
+
+![image](https://user-images.githubusercontent.com/115881685/226192609-c51b9778-ee10-4d79-95a7-669e969422ed.png)
+
+![image](https://user-images.githubusercontent.com/115881685/226192659-a7c5572a-df84-48d8-9957-313f4d68d29e.png)
+
+![image](https://user-images.githubusercontent.com/115881685/226192701-f8b973e1-7622-4eba-a023-61d63e4eba4b.png)
+
+![image](https://user-images.githubusercontent.com/115881685/226192893-45f42f9f-22fb-46c2-802f-57c29ed813b1.png)
+
+
+
+Follow the same step to launch the second ec2 instance in the private app subnet az2.
+
+Once done go to your ec2 dashboard to see your instances
+
+
+
+![image](https://user-images.githubusercontent.com/115881685/225570488-9a55e742-b4eb-475f-8bd9-ee3d7c41147a.png)
+
+
+
+### Create target group
+Next step is to create target group and place the two instances in it, this will allow the application loadbalancer to route traffic to the intances.
+
+Select target groups in the left side of the ec2 management console and click create "target group". see screenshots below for instructions.
+
+
+![image](https://user-images.githubusercontent.com/115881685/225576333-7743d14e-b60b-45a0-ab2e-180f0f3bdde0.png)
+
+![image](https://user-images.githubusercontent.com/115881685/225575828-df05340b-efae-4b9d-9bd0-230b129734d2.png)
+
+![image](https://user-images.githubusercontent.com/115881685/225576061-5a34adcf-2872-45e7-b045-6de783858209.png)
+
+![image](https://user-images.githubusercontent.com/115881685/225576714-edea1191-d52d-4b3b-a2bb-58aed88c652c.png)
+
+
+
+
+We can now go on and create the application loadbalancer, see screenshots below for instructions.
+
+
+
+![image](https://user-images.githubusercontent.com/115881685/225577953-3448d42c-efd9-4b55-8452-331e052a63a3.png)
+
+![image](https://user-images.githubusercontent.com/115881685/225578179-ac11782e-63fe-4ecc-a34a-71a718a718a8.png)
+
+![image](https://user-images.githubusercontent.com/115881685/225578484-081ec3f2-aaef-4efc-a90f-28a58ef5af62.png)
+
+![image](https://user-images.githubusercontent.com/115881685/225578915-fb862d6f-a469-49d3-98c2-91a9c1e2bce4.png)
+
+![image](https://user-images.githubusercontent.com/115881685/225579182-528e7d85-53b4-40e0-812a-d9f0465a47b4.png)
+
+![image](https://user-images.githubusercontent.com/115881685/225579387-b8db40a4-11ed-4329-8fe4-577e58d05b15.png)
+ 
+ 
+Then click create loadbalancer.
+
+
+
+![image](https://user-images.githubusercontent.com/115881685/225580854-e6973063-7da4-472a-9ed2-be336b3cd260.png)
+
+
+
+We have successfully created the loadbalancer, wait for the status to change to active, then copy the the dns of the loadbancer and paste it in your browser, press enter.
+
+
+
+
 
 
 
