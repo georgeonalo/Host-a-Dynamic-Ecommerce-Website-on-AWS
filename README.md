@@ -931,6 +931,140 @@ Once in edit the App URL by deleting the you see there and replacing it with the
 
 
 
+We have successfully updated the app url of the env file of our website, next restart the server by typing in "service httpd restart" and enter.
+
+
+
+
+
+![image](https://user-images.githubusercontent.com/115881685/226203678-80fc5cc1-ab2f-4a96-aff1-c8ff5b931216.png)
+
+
+
+
+We have successfully restart our apache webserver.
+
+
+
+Then go to the website and click "refresh button"
+
+
+
+
+
+![image](https://user-images.githubusercontent.com/115881685/226203804-006cd922-5be4-4be6-a4ac-52368b81c9cf.png)
+
+![image](https://user-images.githubusercontent.com/115881685/226203902-3c5c59f9-0735-41eb-b182-fc7d739c06db.png)
+
+
+
+
+
+There you go our website is now loading properly.
+
+
+
+
+
+## Create Another AMI
+
+Next, we will create a new AMI because we updated the configuration files of the website. Follow the same process as before.
+
+
+
+
+
+![image](https://user-images.githubusercontent.com/115881685/226204219-3819ef18-a37b-4283-bc25-f1aaf838d02a.png)
+
+![image](https://user-images.githubusercontent.com/115881685/226204242-cc4233f3-dd5b-468c-9d57-f1cc367e2ec6.png)
+
+![image](https://user-images.githubusercontent.com/115881685/226204284-4d88e533-bad1-47e5-9b7b-cd170f0c2794.png)
+
+![image](https://user-images.githubusercontent.com/115881685/226212842-19d6e588-4d31-4c0d-91fc-aeda63f276f8.png)
+
+
+![image](https://user-images.githubusercontent.com/115881685/226204312-79c94abe-58c7-411a-9504-ef4f392f49fc.png)
+
+
+
+Since we have updated the AMI, we can go ahead and delete the first AMI as well as its snapshot.
+
+
+
+
+
+## Create Auto Scaling Group
+
+
+ We need to create an autoscaling group to dynamically create and scale the webservers in the private app subnets.
+ 
+ Before creating the autoscaling groups first terminate the web server AZ1 that was manually created.
+ 
+ 
+ 
+ ![image](https://user-images.githubusercontent.com/115881685/226212974-4bb05c57-9b31-4651-be48-1bd2712432de.png)
+
+
+
+ 
+Now go ahead, Follow the steps in the screenshots below, first we will create launch template.
+The launch template contains configuration about our instance that autoscaling group will use to launch new instances.
+
+
+
+
+
+![image](https://user-images.githubusercontent.com/115881685/226213030-0396ebcd-725d-4c60-947b-49ede96ca863.png)
+
+
+![image](https://user-images.githubusercontent.com/115881685/226213068-ddf8fba5-b1f6-4a8d-b6d3-b629ccf86bc5.png)
+
+
+![image](https://user-images.githubusercontent.com/115881685/226213114-9579bcbc-4dd5-4fbc-8ca3-27ea80b0b9e4.png)
+
+![image](https://user-images.githubusercontent.com/115881685/226213147-f1cdb91e-b07d-4bda-a96b-5ec598658882.png)
+
+
+
+
+
+The Launch template has been created, go on create the Auto-Scaling group.
+
+
+
+
+![image](https://user-images.githubusercontent.com/115881685/225646762-c799ddd5-5e2c-4f79-93cc-01ecb897f33e.png)
+
+![image](https://user-images.githubusercontent.com/115881685/225646962-554c6591-9901-4025-adbc-bdace4164a2a.png)
+
+![image](https://user-images.githubusercontent.com/115881685/225647149-fc377b11-eb47-4736-87af-5355595b3646.png)
+
+![image](https://user-images.githubusercontent.com/115881685/225647941-6cdc619b-fbdb-4c9e-9568-30e764850679.png)
+
+![image](https://user-images.githubusercontent.com/115881685/225648143-eaa00795-4a6d-4215-af0c-070a82a14bd5.png)
+
+![image](https://user-images.githubusercontent.com/115881685/225648301-9e4334e4-b9c7-4d3f-a36d-31d6d3d8234e.png)
+
+![image](https://user-images.githubusercontent.com/115881685/225648588-2f364f9e-77cf-4ae0-be43-00198dc3e31d.png)
+
+![image](https://user-images.githubusercontent.com/115881685/225648873-f5d665fd-9240-40ee-a112-1d32f9fee0e4.png)
+
+![image](https://user-images.githubusercontent.com/115881685/225649073-c6babd13-c36e-481c-842d-03b074253bb5.png)
+
+![image](https://user-images.githubusercontent.com/115881685/225649326-172d9019-0ac9-4ac7-9d0f-d6cd36b6e79d.png)
+
+
+
+
+
+Now go to the ec2 dashboard to see the two new instances created by our autoscaling group.
+
+
+
+
+
+
+
 
 
 
