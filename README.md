@@ -721,14 +721,51 @@ Then click create loadbalancer.
 
 
 
-![image](https://user-images.githubusercontent.com/115881685/225580854-e6973063-7da4-472a-9ed2-be336b3cd260.png)
+![image](https://user-images.githubusercontent.com/115881685/226195203-46f31f22-0fee-4bac-829a-6801d8900164.png)
 
 
 
 We have successfully created the loadbalancer, wait for the status to change to active, then copy the the dns of the loadbancer and paste it in your browser, press enter.
 
 
+![image](https://user-images.githubusercontent.com/115881685/226195239-3d6ea163-2fa7-447a-aa93-99850867e707.png)
 
+![image](https://user-images.githubusercontent.com/115881685/226195261-1ee0b49e-ccce-4950-b29d-d075f5bd00ca.png)
+
+
+
+
+We can now acceass our webiste using the dns name of the application loadbalancer.
+
+
+Next step, terminate the setup server.
+
+
+
+## Create a Record Set in Route 53
+Next step is to create a record set in route 53 to access the website with our domain.
+
+Go to the console and search route 53, select it under services, once in the route 53 dashboard, click on "hosted zone" and select your domain, on next page click "create record", under "record name", type in "www" then toggle on the "alias, scroll down and select the drop down, select "alias to application and classic loadbalancer", then select the "us-east-1", next select the drop down and select the application loadbalancer that was created. Then click "create record".
+
+
+
+
+![image](https://user-images.githubusercontent.com/115881685/225618256-e6816b45-2ed8-4990-b4a2-fa3e10f51f86.png)
+
+![image](https://user-images.githubusercontent.com/115881685/225618394-0ad70fc4-557a-4adb-a806-d81b06d594bc.png)
+
+![image](https://user-images.githubusercontent.com/115881685/225618618-3c94e027-1d20-4c05-b1d2-b3f5c2ce237c.png)
+
+
+Now the record set has been created, to access our website, copy the record name and paste it in your browser press enter.
+
+
+
+![image](https://user-images.githubusercontent.com/115881685/226195664-560c5818-6d81-4c52-b2f8-4679c0895f5e.png)
+
+
+
+We can now access the website with our domain name.
 
 
 
