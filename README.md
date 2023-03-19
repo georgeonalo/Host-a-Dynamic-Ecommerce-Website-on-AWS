@@ -308,6 +308,118 @@ To do this, go to the IAM dashboard in the console and select "Roles" and click 
 
 ![image](https://user-images.githubusercontent.com/115881685/226166301-6140779d-04c6-4e12-937c-b1fefe5a5918.png)
 ![image](https://user-images.githubusercontent.com/115881685/226166384-8282243f-e011-4e64-ac73-1a4a1215ad38.png)
+![image](https://user-images.githubusercontent.com/115881685/226166772-3ad010dc-d79a-4600-9b7d-7ac3e9c01757.png)
+![image](https://user-images.githubusercontent.com/115881685/226166812-d624831b-b5e5-4681-aa5e-cdb9111255bb.png)
+
+
+
+
+
+## Deploy eCommerce Website.
+
+The next step is to setup a server(instance) that we will use to deploy the ecommerce website. To do this go to the EC2 dashboard and launch an instance, follow the screenshot below.
+
+
+
+![image](https://user-images.githubusercontent.com/115881685/225553562-700ea842-c89b-4c18-9629-ca9db31931c7.png)
+![image](https://user-images.githubusercontent.com/115881685/225553694-d049cc90-d92f-425f-8d5d-318b0edf6aca.png)
+![image](https://user-images.githubusercontent.com/115881685/225554107-4c97de97-c32c-44b3-9787-fa3436524ec8.png)
+![image](https://user-images.githubusercontent.com/115881685/225554370-64159941-7d7b-43f2-93d7-a21a17e8320d.png)
+![image](https://user-images.githubusercontent.com/115881685/226168078-f7f9320b-fc80-473e-adc3-f67c1c1b0c67.png)
+![image](https://user-images.githubusercontent.com/115881685/226168108-9ea087ab-3eda-4c85-b356-05b976da3a42.png)
+
+![image](https://user-images.githubusercontent.com/115881685/226168225-50032bf5-f0f0-418f-9857-43c5effc7359.png)
+
+
+### Next SSH into the server.
+
+Copy the public ipv4 address and open putty then ssh into it.
+
+
+![image](https://user-images.githubusercontent.com/115881685/226168451-b8425c7d-f52f-4e0f-9625-c0b369ffd9d3.png)
+
+![image](https://user-images.githubusercontent.com/115881685/226168513-f7cd056d-3a44-4872-acc0-539d7b78b618.png)
+
+
+Next we will run the command below to install the website on the ec2 instance. The commands each have detailed information as to what they do.
+
+
+
+```
+#1. update ec2 instance
+sudo su
+sudo yum update -y
+
+
+#2. install apache 
+sudo yum install -y httpd httpd-tools mod_ssl
+sudo systemctl enable httpd 
+sudo systemctl start httpd
+
+
+#3. install php 7.4
+sudo amazon-linux-extras enable php7.4
+sudo yum clean metadata
+sudo yum install php php-common php-pear -y
+sudo yum install php-{cgi,curl,mbstring,gd,mysqlnd,gettext,json,xml,fpm,intl,zip} -y
+
+
+#4. install mysql5.7
+sudo rpm -Uvh https://dev.mysql.com/get/mysql57-community-release-el7-11.noarch.rpm
+sudo rpm --import https://repo.mysql.com/RPM-GPG-KEY-mysql-2022
+sudo yum install mysql-community-server -y
+sudo systemctl enable mysqld
+sudo systemctl start mysqld
+
+
+#5. set permissions
+sudo usermod -a -G apache ec2-user
+sudo chown -R ec2-user:apache /var/www
+sudo chmod 2775 /var/www && find /var/www -type d -exec sudo chmod 2775 {} \;
+sudo find /var/www -type f -exec sudo chmod 0664 {} \;
+
+
+#6. download the FleetCart zip from s3 to the html derectory on the ec2 instance
+sudo aws s3 sync s3://georgenal86-fleet-cart-webfiles /var/www/html
+
+
+#7. unzip the FleetCart zip folder
+cd /var/www/html
+sudo unzip FleetCart.zip
+
+
+#8. move all the files and folder from the FleetCart directory to the html directory
+sudo mv FleetCart/* /var/www/html
+
+
+
+#9. move all the hidden files from the FleetCart diretory to the html directory
+sudo mv FleetCart/.DS_Store /var/www/html
+sudo mv FleetCart/.editorconfig /var/www/html
+sudo mv FleetCart/.env /var/www/html
+sudo mv FleetCart/.env.example /var/www/html
+sudo mv FleetCart/.eslintignore /var/www/html
+sudo mv FleetCart/.eslintrc /var/www/html
+sudo mv FleetCart/.gitignore /var/www/html
+sudo mv FleetCart/.htaccess /var/www/html
+sudo mv FleetCart/.npmrc /var/www/html
+sudo mv FleetCart/.php_cs /var/www/html
+sudo mv FleetCart/.rtlcssrc /var/www/html
+
+
+#10. delete the FleetCart and FleetCart.zip folder
+sudo rm -rf FleetCart FleetCart.zip
+
+
+#11. enable mod_rewrite on ec2 linux, add apache to group, and restart server
+sudo sed -i '/<Directory "\/var\/www\/html">/,/<\/Directory>/ s/AllowOverride None/AllowOverride All/' /etc/httpd/conf/httpd.conf
+chown apache:apache -R /var/www/html 
+sudo service httpd restart
+```
+
+
+
+
 
 
 
