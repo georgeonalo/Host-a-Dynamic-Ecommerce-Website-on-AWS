@@ -342,6 +342,7 @@ Copy the public ipv4 address and open putty then ssh into it.
 
 
 Next we will run the command below to install the website on the ec2 instance. The commands each have detailed information as to what they do.
+Ensure to change the name of the s3 bucket in the sixth(6) to the name of your webfiles bucket.
 
 
 
@@ -419,9 +420,173 @@ sudo service httpd restart
 
 
 
+To the Access the website, copy the ipv4 address of the setup server and paste it in a new tab in your web browser, enter it,
+
+
+![image](https://user-images.githubusercontent.com/115881685/226174978-7f6208a3-6536-4be0-beee-3873bfbd85ec.png)
 
 
 
+So there you go, we can now access our website, to finish installing the website, scroll down and click "continue".
+
+
+
+![image](https://user-images.githubusercontent.com/115881685/226175240-7cc5693d-5d94-48e7-88cf-59494de9e36b.png)
+
+
+
+On the Configuration page that opens, enter your rds database end point url in the "host field", then enter your rds "db username", db "password" and "database name" respectively.
+
+
+
+![image](https://user-images.githubusercontent.com/115881685/226175619-7177f1ac-5462-4246-8564-edfc8365e0e5.png)
+
+
+
+Then scroll down and enter your, personal details and scroll down again.
+
+
+
+![image](https://user-images.githubusercontent.com/115881685/226175776-f7928189-9a91-4eaa-8440-9e3cb34c7a87.png)
+
+
+
+
+Finally enter your "store details" and click "install".
+
+
+
+![image](https://user-images.githubusercontent.com/115881685/226175862-12006288-6ad5-47be-838f-b8351a28e94a.png)
+
+![image](https://user-images.githubusercontent.com/115881685/226176039-c77d3bac-d2aa-4bcf-87e8-49eee7cc9d01.png)
+
+
+Fantastic !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!, we have successfully install the website, click "go to your shop"
+
+
+
+![image](https://user-images.githubusercontent.com/115881685/226176091-beabc13c-9d0b-4d9b-af9f-f9644418fe13.png)
+
+
+
+And this is the ecommerce store, we have successfully install the fleetcart store, and currently the site is empty because the web developer has given us a blank template so that we can customize the website how we want, next we are going to upload?import all the dummy data that the site needs to make it presentable.
+
+
+
+
+
+## Import the Dummy Data for the Website
+
+To import the dummy data for the website, you will need an application called "mysql workbench", so if you dont have, go and download and install it on your system.
+
+
+
+![image](https://user-images.githubusercontent.com/115881685/226176952-b3a302f0-1bc5-4e42-a51e-b68ef7e52dbd.png)
+
+
+
+
+Next step is to create a pem file, go to the ec2 dashboard and on the left side, select "key pair" and click "create key pair". Follow the instructions in the screenshots below.
+
+
+
+
+
+![image](https://user-images.githubusercontent.com/115881685/226177025-25f134d4-ff06-48fc-9f97-4aa9a7c44b77.png)
+
+
+
+
+
+Next we will launch a ec2 instance in the public subnet that can be sshed into, follow the previous steps, see screenshots below.
+
+
+
+![image](https://user-images.githubusercontent.com/115881685/226177583-254121c0-a0df-48fd-b8c7-b2ca4f71a6c9.png)
+
+
+
+
+ The next thing to do is to create a security group that we will add to the rds instance, to allow us to connect to it from the dummy server we just created.
+ 
+ 
+ 
+
+
+![image](https://user-images.githubusercontent.com/115881685/226177870-7d1ff426-496a-4d1d-a7b0-e7bbc602ab33.png)
+
+![image](https://user-images.githubusercontent.com/115881685/226177901-936a8901-4568-4feb-8494-3bce4c1fc08b.png)
+
+
+
+
+Next add the security group to the rds instance to allow the dummy server to connect it. Open the Rds dashboard.
+
+
+
+![image](https://user-images.githubusercontent.com/115881685/226178156-a7bc0fe3-9b1e-45fa-a5e4-5d11a98e22eb.png)
+
+![image](https://user-images.githubusercontent.com/115881685/226178194-15af827b-617d-4004-99f9-30d80d1d9406.png)
+
+![image](https://user-images.githubusercontent.com/115881685/226178252-9d3e6d61-f09f-48ea-8e8e-15fb3026fb4a.png)
+
+
+
+
+Next step is to import the SQL file of our website into the RDS database. To do this open MySQL Workbench, select "database" click "connect to database". Note "ssh host name" refers to the dns of the public ipv4 of the dummy server, "ssh key file" refers to the pem file that was created and downloaded, "mysql hostname" is the end point url of our rds database, and "username" and "password" refers to the rds database username and password respectively.
+
+
+
+
+![image](https://user-images.githubusercontent.com/115881685/226179007-8aca4a4a-3b59-4799-bfe3-5629e2d85b7e.png)
+
+
+
+![image](https://user-images.githubusercontent.com/115881685/226179245-fcdae584-23d5-4b22-a7f4-61bf37b664e4.png)
+
+
+
+
+then click ok, ignore the warning message and hit ok again.
+
+
+
+
+![image](https://user-images.githubusercontent.com/115881685/226180545-4936191c-7c58-4e4d-9058-270ac17d8e7f.png)
+
+
+
+Finally we have connected to the RDS database, we can tell by looking at the name of the rds database, "applicationdb" at the top left hand corner.
+
+
+Next we will import our SQL file from our computer into the RDS database. click on "administration" tab and follow the screenshots.
+
+
+
+![image](https://user-images.githubusercontent.com/115881685/226180768-7abe8cdc-36ec-4bef-a68c-b44a1eebb1f6.png)
+
+![image](https://user-images.githubusercontent.com/115881685/226181015-d2a3193d-dd56-41d7-a69d-ca63c2edf037.png)
+
+
+
+
+Give it some time to finish importing.
+
+
+
+
+
+![image](https://user-images.githubusercontent.com/115881685/226181131-25d32dea-176a-47cf-b0da-ab0e92ec1447.png)
+
+
+
+
+
+Hurray !!!!!!!!!!!!!!!!!!!!!!! the importation is complete. All our data has now been imported into the rds database.
+
+
+
+Next step is to delete all the resourses we created for the importation, things like, dummy key, dummy server, dummy security group. so go aheard and delete them.
 
 
 
