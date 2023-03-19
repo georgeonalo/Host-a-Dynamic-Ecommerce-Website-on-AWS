@@ -1054,6 +1054,7 @@ The Launch template has been created, go on create the Auto-Scaling group.
 ![image](https://user-images.githubusercontent.com/115881685/225649326-172d9019-0ac9-4ac7-9d0f-d6cd36b6e79d.png)
 
 
+![image](https://user-images.githubusercontent.com/115881685/226214103-c18b6815-d947-4642-bf0a-fb94cd445c09.png)
 
 
 
@@ -1063,13 +1064,35 @@ Now go to the ec2 dashboard to see the two new instances created by our autoscal
 
 
 
+![image](https://user-images.githubusercontent.com/115881685/226213877-fddbad43-21c2-4743-b145-75e6d07dfa9f.png)
 
 
 
 
 
+There you go two new webservers have been spun up by the Auto Scaling Group we just created, you can tell by their names because thats what we gave the in the ASG creation process, further more, under status, they are initializing.
+
+To still know if we can access our website, type in your domain name in a browser and press enter.
 
 
+
+
+![image](https://user-images.githubusercontent.com/115881685/226214073-8d376711-4729-43e1-ae6b-18f2e60c899b.png)
+
+
+![image](https://user-images.githubusercontent.com/115881685/226214138-98fddaf7-b529-4f01-8c8a-3bf60cf5a7b5.png)
+
+
+
+
+And there you go i can access my website and everything is working properly.
+
+A big congratulations to you if made it to the end of this project.
+
+
+
+
+### Pls note, delete all the resources/services created for this project to avoid charges.
 
 
 
