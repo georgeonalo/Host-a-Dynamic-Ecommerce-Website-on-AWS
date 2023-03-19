@@ -3,7 +3,7 @@
 In this project, i demonstrated how to deploy an ecommerce website on aws using a reference architecture. AWS services used in this project includes; VPC, Security group, Ec2, Nat gateways, RDS, Application Loadbalancer, Route 53, Autoscaling Group, Certificate Manager, S3 and more.
 
 
-## Project reference architecture
+## Project Reference Architecture
 
 ![1 _LAMP_Stack_Project_Reference_Architecture](https://user-images.githubusercontent.com/115881685/225284346-905bb80b-ad99-4b5c-9f28-832aa455dde3.jpg)
 
@@ -15,6 +15,7 @@ To kick off the project, we will build a custom vpc, see vpc reference architect
 In a 3 tier vpc reference architecture, the infrastructure is divided into 3 tiers, the first tier contains a public subnet which holds a nat gateway, bastion host and loadbalancer. In the second tier, we have a private subnet which hold the webservers(ec2 instances), the third tier contains a private subnet, which holds the data base. All this subnets are replicated accross multiple availability zones to provide high avalaibilty and fault tolerence. Then finally we will create an internet gateway and route table, this will provide resourses in the vpc with internet access.
 
 
+### VPC Reference Architecture
 ![2 _VPC_Reference_Architecture](https://user-images.githubusercontent.com/115881685/225285355-25409fca-777c-4784-b8de-23e4dcb70191.jpg)
 
 To create the VPC, go to the AWS console a type vpc in the search box and select vpc. In the VPC dashboard, select VPC, then click create VPC.
