@@ -9,7 +9,7 @@ In this project, i demonstrated how to deploy an ecommerce website on aws using 
 
 
 
-# Create VPC with Public and Private Subnets
+## Create VPC with Public and Private Subnets
 To kick off the project, we will build a custom vpc, see vpc reference architecture below which is three(3) tiered designed.
 
 In a 3 tier vpc reference architecture, the infrastructure is divided into 3 tiers, the first tier contains a public subnet which holds a nat gateway, bastion host and loadbalancer. In the second tier, we have a private subnet which hold the webservers(ec2 instances), the third tier contains a private subnet, which holds the data base. All this subnets are replicated accross multiple availability zones to provide high avalaibilty and fault tolerence. Then finally we will create an internet gateway and route table, this will provide resourses in the vpc with internet access.
